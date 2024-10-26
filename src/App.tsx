@@ -1,9 +1,9 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useState } from "react";
 
 const App: FunctionComponent = () => {
-  const name: String = "React";
+  const [name, setName] = useState<String>("React");
 
-  return <h1>Hello, {name} !</h1>;
+  return <h1>Bonjour, {name} !</h1>;
 };
 
 export default App;
