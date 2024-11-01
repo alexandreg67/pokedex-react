@@ -2,18 +2,42 @@ import Pokemon from "../models/pokemon";
 
 export default class PokemonService {
   static async getPokemons(): Promise<Pokemon[]> {
-    const response = await fetch("http://localhost:3001/pokemons");
-    const data = await response.json();
-    return this.isEmpty(data) ? [] : data;
+    try {
+      const response = await fetch("http://localhost:3001/pokemons");
+      this.checkResponseStatus(response);
+      const data = await response.json();
+      return this.isEmpty(data) ? [] : data;
+    } catch (error) {
+      this.handleError(error as Error);
+      return [];
+    }
   }
 
   static async getPokemon(id: number): Promise<Pokemon | null> {
-    const response = await fetch(`http://localhost:3001/pokemons/${id}`);
-    const data = await response.json();
-    return this.isEmpty(data) ? null : data;
+    try {
+      const response = await fetch(`http://localhost:3001/pokemons/${id}`);
+      this.checkResponseStatus(response);
+      const data = await response.json();
+      return this.isEmpty(data) ? null : data;
+    } catch (error) {
+      this.handleError(error as Error);
+      return null;
+    }
+  }
+
+  // Fonction pour vérifier le statut HTTP
+  static checkResponseStatus(response: Response) {
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
   }
 
   static isEmpty(data: Object): boolean {
     return Object.keys(data).length === 0;
+  }
+
+  static handleError(error: Error) {
+    console.error("An error occurred:", error);
+    // Possibilité d’ajouter une logique supplémentaire, comme des alertes ou logs
   }
 }
