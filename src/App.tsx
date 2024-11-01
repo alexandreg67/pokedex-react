@@ -5,6 +5,7 @@ import PokemonDetail from "./pages/PokemonDetail";
 import PageNotFound from "./pages/PageNotFound";
 import PokemonEdit from "./pages/PokemonEdit";
 import PokemonAdd from "./pages/PokemonAdd";
+import Login from "./pages/Login";
 
 const App: FunctionComponent = () => {
   return (
@@ -19,10 +20,11 @@ const App: FunctionComponent = () => {
         </nav>
         <Switch>
           <Route exact path="/" component={PokemonList} />
+          <Route exact path="/login" component={Login} />
           <Route exact path="/pokemons" component={PokemonList} />
-          <Route path="/pokemons/add" component={PokemonAdd} />
-          <Route path="/pokemons/edit/:id" component={PokemonEdit} />
-          <Route path="/pokemons/:id" component={PokemonDetail} />
+          <Route exact path="/pokemons/add" component={PokemonAdd} />
+          <Route exact path="/pokemons/edit/:id" component={PokemonEdit} />
+          <Route exact path="/pokemons/:id" component={PokemonDetail} />
           <Route component={PageNotFound} />
         </Switch>
       </div>
