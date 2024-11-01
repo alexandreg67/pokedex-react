@@ -73,6 +73,16 @@ export default class PokemonService {
     }
   }
 
+  static async searchPokemon(term: string): Promise<Pokemon[]> {
+    try {
+      const response = await fetch(`http://localhost:3001/pokemons?q=${term}`);
+      return await response.json();
+    } catch (error) {
+      this.handleError(error as Error);
+      return [];
+    }
+  }
+
   // Fonction pour vérifier le statut HTTP
   static checkResponseStatus(response: Response) {
     if (!response.ok) {
