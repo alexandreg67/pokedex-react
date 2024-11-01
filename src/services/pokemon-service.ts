@@ -25,6 +25,26 @@ export default class PokemonService {
     }
   }
 
+  static async updatePokemon(pokemon: Pokemon): Promise<Pokemon | null> {
+    try {
+      const response = await fetch(
+        `http://localhost:3001/pokemons/${pokemon.id}`,
+        {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(pokemon),
+        }
+      );
+      this.checkResponseStatus(response);
+      return await response.json();
+    } catch (error) {
+      this.handleError(error as Error);
+      return null;
+    }
+  }
+
   // Fonction pour vérifier le statut HTTP
   static checkResponseStatus(response: Response) {
     if (!response.ok) {
