@@ -37,7 +37,36 @@ export default class PokemonService {
           body: JSON.stringify(pokemon),
         }
       );
-      this.checkResponseStatus(response);
+      return await response.json();
+    } catch (error) {
+      this.handleError(error as Error);
+      return null;
+    }
+  }
+
+  static async deletePokemon(pokemon: Pokemon): Promise<void> {
+    try {
+      const response = await fetch(
+        `http://localhost:3001/pokemons/${pokemon.id}`,
+        {
+          method: "DELETE",
+        }
+      );
+    } catch (error) {
+      this.handleError(error as Error);
+    }
+  }
+
+  static async addPokemon(pokemon: Pokemon): Promise<Pokemon | null> {
+    delete pokemon.created;
+    try {
+      const response = await fetch("http://localhost:3001/pokemons", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(pokemon),
+      });
       return await response.json();
     } catch (error) {
       this.handleError(error as Error);
