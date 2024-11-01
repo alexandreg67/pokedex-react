@@ -46,12 +46,9 @@ export default class PokemonService {
 
   static async deletePokemon(pokemon: Pokemon): Promise<void> {
     try {
-      const response = await fetch(
-        `http://localhost:3001/pokemons/${pokemon.id}`,
-        {
-          method: "DELETE",
-        }
-      );
+      await fetch(`http://localhost:3001/pokemons/${pokemon.id}`, {
+        method: "DELETE",
+      });
     } catch (error) {
       this.handleError(error as Error);
     }
@@ -59,13 +56,15 @@ export default class PokemonService {
 
   static async addPokemon(pokemon: Pokemon): Promise<Pokemon | null> {
     delete pokemon.created;
+
+    const pokemonData = { ...pokemon, id: pokemon.id.toString() };
     try {
       const response = await fetch("http://localhost:3001/pokemons", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(pokemon),
+        body: JSON.stringify(pokemonData),
       });
       return await response.json();
     } catch (error) {

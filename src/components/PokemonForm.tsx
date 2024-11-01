@@ -86,13 +86,13 @@ const PokemonForm: FunctionComponent<Props> = ({ pokemon, isEditForm }) => {
     const isFormValid = validateForm();
 
     if (isFormValid) {
+      pokemon.picture = form.picture.value;
       pokemon.name = form.name.value;
       pokemon.hp = form.hp.value;
       pokemon.cp = form.cp.value;
       pokemon.types = form.types.value;
-      PokemonService.updatePokemon(pokemon).then(() =>
-        history.push(`/pokemons/${pokemon.id}`)
-      );
+
+      isEditForm ? updatePokemon() : addPokemon();
     }
   };
 
@@ -202,6 +202,16 @@ const PokemonForm: FunctionComponent<Props> = ({ pokemon, isEditForm }) => {
     return true;
   };
 
+  const addPokemon = () => {
+    PokemonService.addPokemon(pokemon).then(() => history.push("/pokemons"));
+  };
+
+  const updatePokemon = () => {
+    PokemonService.updatePokemon(pokemon).then(() =>
+      history.push(`/pokemons/${pokemon.id}`)
+    );
+  };
+
   const deletePokemon = () => {
     PokemonService.deletePokemon(pokemon).then(() => history.push("/pokemons"));
   };
@@ -211,20 +221,41 @@ const PokemonForm: FunctionComponent<Props> = ({ pokemon, isEditForm }) => {
       <div className="row">
         <div className="col s12 m8 offset-m2">
           <div className="card hoverable">
-            <div className="card-image">
-              <img
-                src={pokemon.picture}
-                alt={pokemon.name}
-                style={{ width: "250px", margin: "0 auto" }}
-              />
-              <span className="btn-floating halfway-fab waves-effect waves-light">
-                <i className="material-icons" onClick={() => deletePokemon()}>
-                  delete
-                </i>
-              </span>
-            </div>
+            {isEditForm && (
+              <div className="card-image">
+                <img
+                  src={pokemon.picture}
+                  alt={pokemon.name}
+                  style={{ width: "250px", margin: "0 auto" }}
+                />
+                <span className="btn-floating halfway-fab waves-effect waves-light">
+                  <i className="material-icons" onClick={() => deletePokemon()}>
+                    delete
+                  </i>
+                </span>
+              </div>
+            )}
             <div className="card-stacked">
               <div className="card-content">
+                {/* Pokemon picture */}
+                {isAddForm() && (
+                  <div className="form-group">
+                    <label htmlFor="picture">Image</label>
+                    <input
+                      id="picture"
+                      name="picture"
+                      type="text"
+                      className="form-control"
+                      value={form.picture.value}
+                      onChange={(e) => handleInputChange(e)}
+                    ></input>
+                    {form.picture.error && (
+                      <div className="card-panel red accent-1">
+                        {form.picture.error}
+                      </div>
+                    )}
+                  </div>
+                )}
                 {/* Pokemon name */}
                 <div className="form-group">
                   <label htmlFor="name">Nom</label>
