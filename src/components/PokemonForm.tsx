@@ -6,6 +6,7 @@ import PokemonService from "../services/pokemon-service";
 
 type Props = {
   pokemon: Pokemon;
+  isEditForm: boolean;
 };
 
 type Field = {
@@ -15,14 +16,16 @@ type Field = {
 };
 
 type Form = {
+  picture: Field;
   name: Field;
   hp: Field;
   cp: Field;
   types: Field;
 };
 
-const PokemonForm: FunctionComponent<Props> = ({ pokemon }) => {
+const PokemonForm: FunctionComponent<Props> = ({ pokemon, isEditForm }) => {
   const [form, setForm] = useState<Form>({
+    picture: { value: pokemon.picture },
     name: { value: pokemon.name, isValid: true },
     hp: { value: pokemon.hp, isValid: true },
     cp: { value: pokemon.cp, isValid: true },
@@ -93,8 +96,39 @@ const PokemonForm: FunctionComponent<Props> = ({ pokemon }) => {
     }
   };
 
+  const isAddForm = () => {
+    return !isEditForm;
+  };
+
   const validateForm = () => {
     let newForm: Form = form;
+
+    // Validator picture url
+    if (isAddForm()) {
+      const start =
+        "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/";
+      const end = ".png";
+
+      if (
+        !form.picture.value.startsWith(start) ||
+        !form.picture.value.endsWith(end)
+      ) {
+        const errorMsg: string = "L'url de l'image n'est pas valide.";
+        const newField: Field = {
+          value: form.picture.value,
+          error: errorMsg,
+          isValid: false,
+        };
+        newForm = { ...newForm, ...{ picture: newField } };
+      } else {
+        const newField: Field = {
+          value: form.picture.value,
+          error: "",
+          isValid: true,
+        };
+        newForm = { ...newForm, ...{ picture: newField } };
+      }
+    }
 
     // Validator name
     if (!/^[a-zA-Zàéè ]{3,25}$/.test(form.name.value)) {

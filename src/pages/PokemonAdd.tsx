@@ -9,7 +9,7 @@ const PokemonAdd: FunctionComponent = () => {
   return (
     <div>
       <h2 className="header center">Ajouter un pokémon</h2>
-      <PokemonForm pokemon={pokemon} />
+      <PokemonForm pokemon={pokemon} isEditForm={false} />
     </div>
   );
 };
