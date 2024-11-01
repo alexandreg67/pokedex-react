@@ -19,7 +19,7 @@ const PokemonEdit: FunctionComponent<RouteComponentProps<Params>> = ({
   }, [match.params.id]);
 
   return (
-    <div>
+    <div className="container">
       {pokemon ? (
         <div className="row">
           <h2 className="header center">Éditer {pokemon.name}</h2>

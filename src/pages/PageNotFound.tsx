@@ -9,7 +9,7 @@ const PageNotFound: FunctionComponent = () => {
         alt="Page non trouvée"
       />
       <h1>Hey, cette page n'existe pas !</h1>
-      <Link to="/" className="waves-effect waves-teal btn-flat">
+      <Link to="/" className="btn-flat waves-effect waves-teal">
         Retourner à l'accueil
       </Link>
     </div>

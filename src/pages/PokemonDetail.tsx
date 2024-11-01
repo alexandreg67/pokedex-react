@@ -20,7 +20,7 @@ const PokemonsDetail: FunctionComponent<RouteComponentProps<Params>> = ({
   }, [match.params.id]);
 
   return (
-    <div>
+    <div className="container">
       {pokemon ? (
         <div className="row">
           <div className="col s12 m8 offset-m2">
@@ -34,7 +34,7 @@ const PokemonsDetail: FunctionComponent<RouteComponentProps<Params>> = ({
                 />
                 <Link
                   to={`/pokemons/edit/${pokemon.id}`}
-                  className="btn btn-floating halfway-fab waves-effect waves-light"
+                  className="btn btn-floating halfway-fab waves-effect waves-light red"
                 >
                   <i className="material-icons">edit</i>
                 </Link>
@@ -65,7 +65,10 @@ const PokemonsDetail: FunctionComponent<RouteComponentProps<Params>> = ({
                         <td>Types</td>
                         <td>
                           {pokemon.types.map((type) => (
-                            <span key={type} className={formatType(type)}>
+                            <span
+                              key={type}
+                              className={`type-badge ${formatType(type)}`}
+                            >
                               {type}
                             </span>
                           ))}

@@ -1,0 +1,109 @@
+/* ---------- Styles Généraux ---------- */
+body {
+  background: linear-gradient(135deg, #e3f2fd 0%, #90caf9 100%);
+  font-family: "Roboto", sans-serif;
+}
+
+/* Titre principal */
+h1.center,
+h2.header {
+  color: #ff5722;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+/* ---------- Navbar ---------- */
+.nav-wrapper {
+  background: linear-gradient(45deg, #ff5722, #ff7043);
+  padding: 0 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.brand-logo {
+  font-size: 1.8rem;
+  color: #fff;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.brand-logo:hover {
+  transform: scale(1.1);
+  color: #ffd600;
+}
+
+/* ---------- Cartes de Pokémon ---------- */
+.card {
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  background-color: #ffffff;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+/* ---------- Boutons ---------- */
+.btn-floating {
+  background-color: #ff5722;
+  transition: background-color 0.3s ease;
+}
+
+.btn-floating:hover {
+  background-color: #f44336;
+}
+
+.btn-flat,
+.btn {
+  background-color: #ff5722;
+  transition: background-color 0.3s ease;
+  color: #fff;
+}
+
+.btn-flat:hover,
+.btn:hover {
+  background-color: #f44336;
+}
+
+/* ---------- Types de Pokémon ---------- */
+.type-badge {
+  padding: 5px 10px;
+  border-radius: 4px;
+  color: #fff;
+  margin-right: 5px;
+}
+
+.type-badge.fire {
+  background-color: #f44336;
+}
+.type-badge.water {
+  background-color: #2196f3;
+}
+.type-badge.grass {
+  background-color: #4caf50;
+}
+/* Ajouter d'autres types ici */
+
+/* ---------- Messages et Erreurs ---------- */
+.card-panel {
+  border-radius: 10px;
+}
+
+.card-panel.red {
+  background-color: #ef9a9a;
+}
+
+.card-panel.grey {
+  background-color: #eceff1;
+}
+
+/* ---------- Tables et Contenus ---------- */
+table.striped > tbody > tr:nth-child(odd) {
+  background-color: #f2f2f2;
+}
+
+table.bordered th,
+table.bordered td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}

@@ -12,24 +12,20 @@ const App: FunctionComponent = () => {
   return (
     <BrowserRouter>
       <div>
-        <nav>
-          <div className="nav-wrapper teal">
+        <nav className="nav-wrapper">
+          <div className="container">
             <Link to="/" className="brand-logo center">
               Pokédex
             </Link>
           </div>
         </nav>
         <Switch>
-          <PrivateRoute exact path="/" component={PokemonList} />
+          <Route exact path="/" component={PokemonList} />
           <Route exact path="/login" component={Login} />
-          <PrivateRoute exact path="/pokemons" component={PokemonList} />
-          <PrivateRoute exact path="/pokemons/add" component={PokemonAdd} />
-          <PrivateRoute
-            exact
-            path="/pokemons/edit/:id"
-            component={PokemonEdit}
-          />
-          <PrivateRoute exact path="/pokemons/:id" component={PokemonDetail} />
+          <Route exact path="/pokemons" component={PokemonList} />
+          <Route exact path="/pokemons/add" component={PokemonAdd} />
+          <Route exact path="/pokemons/edit/:id" component={PokemonEdit} />
+          <Route exact path="/pokemons/:id" component={PokemonDetail} />
           <Route component={PageNotFound} />
         </Switch>
       </div>
